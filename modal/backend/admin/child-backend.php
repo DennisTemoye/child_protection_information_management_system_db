@@ -8,7 +8,7 @@ require(realpath($_SERVER["DOCUMENT_ROOT"]) . "../child_abuse_management_system_
 require(realpath($_SERVER["DOCUMENT_ROOT"]) . "../child_abuse_management_system_db/controller/classes/admin/login.php");
 
 
-$child = new Child();
+// $child = new Child();
 $login = new Login();
 
 $json = file_get_contents('php://input');
