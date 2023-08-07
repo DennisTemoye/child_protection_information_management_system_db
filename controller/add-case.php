@@ -10,8 +10,9 @@ class AddCase extends Connection{
         $location = $_POST['location'];
         $name = $_POST['name'];
         $date = $_POST['date'];
+        $case_status = $_POST['case_status'];
         $coon = $this->connect();
-        $sql = "INSERT INTO `cases` (`id`, `case_id`, `type`, `time`, `location`, `name`, `date`, `user_id`) VALUES (NULL, '$case_id', '$type', '$time', '$location', '$name', '$date', '$user_id')";
+        $sql = "INSERT INTO `cases` (`id`, `case_id`, `type`, `time`, `location`, `name`, `date`, `user_id`, `case_status`) VALUES (NULL, '$case_id', '$type', '$time', '$location', '$name', '$date', '$user_id', '$case_status')";
         $result = $coon->query($sql);
         if($result){
             echo "Case added successfully";
