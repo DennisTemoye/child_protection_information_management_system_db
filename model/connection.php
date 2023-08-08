@@ -2,7 +2,7 @@
 // include "access.php";
 // include('./access.php');    
 class Connection{
-    private $db_na = "child_abuse_management_system(admin)";
+    private $db_na = "child_protection_information_management_system_db";
     private $db_host = "localhost";
     private $db_hos = "root";
     private $password = "";

@@ -28,7 +28,7 @@ class SignIn extends Connection {
             if ($check) {
                 $user = $row['lastname'];
                 // $_SESSION['name'] = $name;
-                echo "Welcome ". $user;
+                echo "client";
                 // header("./prof.php");
             }
         } else {
