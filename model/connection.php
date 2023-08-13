@@ -1,6 +1,7 @@
 <?php
 // include "access.php";
 // include('./access.php');    
+// child_protection_information_management_system_db
 class Connection{
     private $db_na = "child_protection_information_management_system_db";
     private $db_host = "localhost";
