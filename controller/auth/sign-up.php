@@ -4,6 +4,8 @@ require_once '../../model/connection.php';
 class Register extends Connection {
     
     public function handle_submit(){
+        $targetDir = 'C:\EMMA\my_project\REACT\child-abuse-management-system\public\ '; // Make sure this directory exists
+        $targetFile = $targetDir . basename($_FILES['image']['name']);
         // $check_empty = empty($_POST['name']) || empty($_POST['email']) || empty($_POST['password']) || empty($_POST['state']) || empty($_POST['city']) || empty($_POST['phone']) || empty($_POST['address']);
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
@@ -22,7 +24,9 @@ class Register extends Connection {
         $school_address = $_POST['school_address'];
         $check = !isset($firstname) || !isset($lastname) || !isset($email) || !isset($address) || !isset($gender) || !isset($age) || !isset($password)|| !isset($phone)|| !isset($bio) || !isset($country)|| !isset($citystate)|| !isset($postal_code)|| !isset($home_address)|| !isset($gurdian_address)|| !isset($school_address);
         $conn = $this->connect();
-        $mysql = "INSERT INTO `children`(`id`, `firstname`, `lastname`, `password`, `age`, `gender`, `address`, `email`,`phone`,`bio`,`country`,`citystate`,`postal_code`,`home_address`,`gurdian_address`,`school_address`) VALUES (NULL,'$firstname','$lastname','$password','$age','$gender','$address','$email','$phone','$bio','$country','$citystate','$postal_code','$home_address','$gurdian_address','$school_address')";
+        $imagePath = $conn->real_escape_string($targetFile);
+        $image_name = $_POST['imageName'];
+        $mysql = "INSERT INTO `children`(`id`, `firstname`, `lastname`, `password`, `age`, `gender`, `address`, `email`,`phone`,`bio`,`country`,`citystate`,`postal_code`,`home_address`,`gurdian_address`,`school_address`, `avatar`, `img_name`) VALUES (NULL,'$firstname','$lastname','$password','$age','$gender','$address','$email','$phone','$bio','$country','$citystate','$postal_code','$home_address','$gurdian_address','$school_address', '$imagePath', '$image_name')";
         if ($check) {
             echo "empty values !!";
         } else if ($stml = $conn->prepare("SELECT `id` `password` FROM `children` WHERE `email` =  ?")) {
@@ -32,7 +36,8 @@ class Register extends Connection {
             if ($stml->num_rows > 0) {
                 echo "Account already exists";
             } 
-            else{
+            else if(move_uploaded_file($_FILES['image']['tmp_name'], $targetFile)){
+
             $result = $conn->query($mysql);
         if ($result) {
             echo "Account Created successful";
